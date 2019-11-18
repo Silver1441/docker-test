@@ -1,6 +1,9 @@
 version: '3'
+
 services:
   web:
+    network_mode: bridge
+    container_name: testwebapp
     build:
       context: .
       dockerfile: Dockerfile
@@ -8,3 +11,20 @@ services:
       - "c:/docker-test-0.0.1-SNAPSHOT_logs:/usr/local/tomcat/docker-test-0.0.1-SNAPSHOT/log/"
     ports:
       - "8080:8080"
+    depends_on:
+      - postgres
+    links:
+      - postgres
+
+database:
+	    image: postgres:latest
+        network_mode: bridge
+        container_name: postgres
+        expose:
+          - 8081
+        ports:
+          - 8081:8081
+	    environment:
+	      POSTGRES_USER=postgres​
+	      POSTGRES_PASSWORD=admin​
+	      POSTGRES_DB=testdb
