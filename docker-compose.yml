@@ -1,0 +1,10 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "c:/docker-test-0.0.1-SNAPSHOT_logs:/usr/local/tomcat/docker-test-0.0.1-SNAPSHOT/log/"
+    ports:
+      - "8080:8080"
