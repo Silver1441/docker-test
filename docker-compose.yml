@@ -20,15 +20,16 @@ services:
   image: postgres:12
   network_mode: bridge
   container_name: counterdb
-  restart: always
+  restart: unless-stopped
   volumes:
-   - "c:/docker-test-0.0.1-SNAPSHOT_db:/var/lib/postgresql/data"
+#   - c:/docker-test-0.0.1-SNAPSHOT_db/counterdb.sql:/var/lib/postgresql/data/counterdb.sql
+   - c:/docker-test-0.0.1-SNAPSHOT_db/counterdb.sql:/docker-entrypoint-initdb.d/counterdb.sql
   expose:
-   - 8081
+   - 5432
   ports:
-   - 8081:8081
+   - 5432:5432
   environment:
-   - POSTGRES_USER=admin​
+   - POSTGRES_USER=admin
    - POSTGRES_PASSWORD=111
    - POSTGRES_DB=testdb
    - PGDATA=/var/lib/postgresql/data
