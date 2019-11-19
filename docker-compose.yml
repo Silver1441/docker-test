@@ -22,8 +22,7 @@ services:
   container_name: counterdb
   restart: unless-stopped
   volumes:
-#   - c:/docker-test-0.0.1-SNAPSHOT_db/counterdb.sql:/var/lib/postgresql/data/counterdb.sql
-   - c:/docker-test-0.0.1-SNAPSHOT_db/counterdb.sql:/docker-entrypoint-initdb.d/counterdb.sql
+   - ./counterdb.sql:/docker-entrypoint-initdb.d/counterdb.sql
   expose:
    - 5432
   ports:
